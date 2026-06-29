@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { Portfolio } from '../portfolios/portfolio.entity.js';
-import { Asset } from '../assets/asset.entity.js';
+import { Portfolio } from '../portfolios/portfolio.entity';
+import { Asset } from '../assets/asset.entity';
 
 @Entity()
 export class PortfolioAsset {

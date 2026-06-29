@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PortfolioAsset } from './portfolio-asset.entity.js';
+import { PortfolioAsset } from './portfolio-asset.entity';
 
 @Injectable()
 export class PortfolioAssetsService {

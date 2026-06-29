@@ -62,6 +62,9 @@ export class Challenge {
   @Column({ nullable: true })
   subscriptionId: string;
 
+  @Column({ type: 'timestamp', nullable: true })
+  expiresAt?: Date;
+
   @CreateDateColumn()
   createdAt: Date;
 

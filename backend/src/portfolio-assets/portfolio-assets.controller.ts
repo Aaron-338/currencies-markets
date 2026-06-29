@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, NotFoundException } from '@nestjs/common';
-import { PortfolioAssetsService } from './portfolio-assets.service.js';
-import { PortfolioAsset } from './portfolio-asset.entity.js';
+import { PortfolioAssetsService } from './portfolio-assets.service';
+import { PortfolioAsset } from './portfolio-asset.entity';
 
 @Controller('portfolio-assets')
 export class PortfolioAssetsController {

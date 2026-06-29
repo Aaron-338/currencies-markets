@@ -147,11 +147,9 @@ export default function EconomicCalendar() {
       
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred'
-      console.error('Error fetching economic events:', errorMessage)
       
       // Retry logic (up to 2 retries)
       if (retryCount < 2) {
-        console.log(`Retrying... (${retryCount + 1}/2)`)
         setRetryCount(retryCount + 1)
         // Wait a bit before retrying
         setTimeout(() => {

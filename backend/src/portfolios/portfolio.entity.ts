@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
-import { User } from '../users/user.entity.js';
-import { PortfolioAsset } from '../portfolio-assets/portfolio-asset.entity.js'; // Corrected import path
-import { Transaction } from '../transactions/transaction.entity.js'; // Import Transaction
+import { User } from '../users/user.entity';
+import { PortfolioAsset } from '../portfolio-assets/portfolio-asset.entity'; // Corrected import path
+import { Transaction } from '../transactions/transaction.entity'; // Import Transaction
 
 @Entity()
 export class Portfolio {

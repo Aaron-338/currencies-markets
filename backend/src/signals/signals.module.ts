@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SignalsController } from './signals.controller.js';
-import { SignalsService } from './signals.service.js';
-import { Signal } from './signal.entity.js';
-import { User } from '../users/user.entity.js';
-import { AuthModule } from '../auth/auth.module.js';
-import { NotificationsModule } from '../notifications/notifications.module.js';
+import { SignalsController } from './signals.controller';
+import { SignalsService } from './signals.service';
+import { Signal } from './signal.entity';
+import { User } from '../users/user.entity';
+import { AuthModule } from '../auth/auth.module';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 @Module({
   imports: [

@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useEffect, useRef, memo } from 'react';
+import React, { useEffect, useRef, memo, useState } from 'react';
+import { Maximize2, Minimize2 } from 'lucide-react';
 
 interface TradingViewChartProps {
   symbol?: string;
@@ -9,23 +10,23 @@ interface TradingViewChartProps {
 const TradingViewChart: React.FC<TradingViewChartProps> = ({ symbol = "NASDAQ:AAPL" }) => {
   const container = useRef<HTMLDivElement>(null);
   const widgetRef = useRef<any>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Suppress known TradingView console warnings on client side
-    const originalConsoleError = console.error;
-    console.error = (...args) => {
-      const message = args[0]?.toString() || '';
-      // Suppress TradingView schema validation warnings
+    // Suppress specific TradingView warnings without overriding console.error
+    const suppressTradingViewWarnings = (event: ErrorEvent) => {
+      const message = event.message || '';
       if (message.includes('data type: unknown does not match a schema') ||
           message.includes('Property:The state with a data type')) {
-        return;
+        event.preventDefault();
       }
-      originalConsoleError.apply(console, args);
     };
 
+    window.addEventListener('error', suppressTradingViewWarnings);
+    
     return () => {
-      // Restore original console.error on cleanup
-      console.error = originalConsoleError;
+      window.removeEventListener('error', suppressTradingViewWarnings);
     };
   }, []);
 
@@ -51,6 +52,7 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({ symbol = "NASDAQ:AA
       
       script.onerror = () => {
         console.error("Failed to load TradingView script");
+        setIsLoading(false);
       };
       
       document.head.appendChild(script);
@@ -111,15 +113,70 @@ const TradingViewChart: React.FC<TradingViewChartProps> = ({ symbol = "NASDAQ:AA
     }
   };
 
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isFullscreen) {
+      setIsFullscreen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isFullscreen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isFullscreen]);
+
   return (
-    <div className="tradingview-widget-container" style={{ height: "500px", width: "100%" }}>
-      <div ref={container} className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }} />
+    <>
+      <div className={`${isFullscreen ? 'fixed inset-0 z-50 bg-background' : 'relative'}`}>
+        {/* Fullscreen controls */}
+        {isFullscreen && (
+          <div className="absolute top-4 right-4 z-20 flex gap-2">
+            <button
+              onClick={toggleFullscreen}
+              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="Exit fullscreen"
+            >
+              <Minimize2 className="h-5 w-5" />
+            </button>
+          </div>
+        )}
+
+        {/* Normal mode controls */}
+        {!isFullscreen && (
+          <div className="absolute top-2 right-2 z-10">
+            <button
+              onClick={toggleFullscreen}
+              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="View in fullscreen"
+            >
+              <Maximize2 className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
+        <div 
+          ref={container} 
+          className={`${isFullscreen ? 'w-full h-full' : 'w-full h-[400px]'}`}
+        />
+      </div>
       <div className="tradingview-widget-copyright">
         <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
           <span className="blue-text">Track all markets on TradingView</span>
         </a>
       </div>
-    </div>
+    </>
   );
 }
 

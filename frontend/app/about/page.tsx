@@ -92,8 +92,8 @@ export default function AboutPage() {
               },
               {
                 name: "Mosotho Mohau",
-                role: "Assistant Head of IT and Solutions",
-                bio: "Web development specialist who assisted in building the Ivrex platform with strong technical expertise.",
+                role: "Chief Technology Architect",
+                bio: "Chief Technology Architect who played a major role in building the Ivrex platform, working with our team to create innovative trading solutions.",
                 image: "/hause.jpg?height=300&width=300",
                 profileLink: "/team/mosotho-mohau",
               },

@@ -67,12 +67,13 @@ export default function FAQSection() {
                   and aren't affected by real-world events. They're based on cryptographically secure random number
                   generators.
                 </p>
-                <p className="mb-2">Our Synthetic Indices Signals (M300 weekly/M1000 monthly) include:</p>
+                <p className="mb-2">Our Synthetic Indices Signals (M350 weekly/M1000 monthly) include:</p>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>Index Name (e.g., VIX75, Boom 1000)</li>
                   <li>Trade Direction (Buy/Sell)</li>
                   <li>Entry Price</li>
                   <li>Stop Loss levels</li>
+                  
                   <li>Take Profit targets</li>
                   <li>Time Frame information</li>
                 </ul>
@@ -123,7 +124,7 @@ export default function FAQSection() {
               <AccordionContent>
                 <p className="mb-2">
                   As a licensed and approved Deriv agent, we help local traders deposit and withdraw funds using local
-                  payment methods like EcoCash and Mpesa. Our services include:
+                  payment methods like EcoCash, Mpesa, Skrill and Paypal. Our services include:
                 </p>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>Instant deposits & withdrawals</li>

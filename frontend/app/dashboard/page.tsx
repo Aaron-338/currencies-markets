@@ -273,14 +273,12 @@ function PersonalDashboard() {
       
       // Handle signal-related notifications
       if (latestNotification.type === 'signal') {
-        console.log('🔔 Notification: Signal notification received:', latestNotification);
         fetchSignals(); // Refresh signals when signal notification received
       }
       
       // Handle signal events
       if (latestNotification.type === 'signal_created') {
         const signal = latestNotification.data;
-        console.log('🔔 WebSocket: New signal created:', signal);
         setActiveSignals(prev => [signal, ...prev]);
         
         toastRef.current({
@@ -291,7 +289,6 @@ function PersonalDashboard() {
       
       if (latestNotification.type === 'signal_closed') {
         const signal = latestNotification.data;
-        console.log('🔔 WebSocket: Signal closed:', signal);
         setActiveSignals(prev => prev.filter(s => s.id !== signal.id));
         setSignalHistory(prev => [signal, ...prev]);
         
@@ -303,7 +300,6 @@ function PersonalDashboard() {
       
       if (latestNotification.type === 'signal_updated') {
         const signal = latestNotification.data;
-        console.log('🔔 WebSocket: Signal updated:', signal);
         setActiveSignals(prev => prev.map(s => s.id === signal.id ? signal : s));
       }
     }
@@ -311,20 +307,14 @@ function PersonalDashboard() {
 
   const fetchSignals = useCallback(async () => {
     try {
-      console.log('🔍 Fetching signals...');
       const active = await getActiveSignals();
-      console.log('✅ Active signals received:', active.length, active);
       setActiveSignals(active);
 
       const history = await getSignalHistory();
-      console.log('✅ Signal history received:', history.length, history);
       setSignalHistory(history);
     } catch (error: any) {
-      console.error("❌ Failed to fetch signals:", error);
-      
       // Handle authentication errors silently
       if (error.response?.status === 401) {
-        console.warn('🔒 User not authenticated - skipping signals fetch')
         return
       }
       
@@ -364,7 +354,6 @@ function PersonalDashboard() {
       });
       fetchSignals();
     } catch (error) {
-      console.error("Failed to close signal:", error);
       toastRef.current({
         variant: "destructive",
         title: "Failed to Close Signal",

@@ -31,7 +31,7 @@ export default function SettingsPage() {
     try {
       await update();
     } catch (error) {
-      console.log('Session refresh failed:', error);
+      // Session refresh failed silently - not critical for user experience
     }
   };
 
@@ -67,7 +67,6 @@ export default function SettingsPage() {
 
       if (!res.ok) {
         const errorText = await res.text();
-        console.error('Profile update failed:', errorText);
         
         let errorData;
         try {
@@ -102,8 +101,6 @@ export default function SettingsPage() {
       });
 
     } catch (error: any) {
-      console.error('Profile update error:', error)
-      
       // Provide more specific error messages
       let errorMessage = "Could not save your changes. Please try again.";
       

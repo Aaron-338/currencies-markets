@@ -9,10 +9,10 @@ import {
   Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { SignalsService } from './signals.service.js';
-import { CreateSignalDto } from './dto/create-signal.dto.js';
-import { AdminGuard } from '../auth/admin.guard.js';
-import { Signal } from './signal.entity.js';
+import { SignalsService } from './signals.service';
+import { CreateSignalDto } from './dto/create-signal.dto';
+import { AdminGuard } from '../auth/admin.guard';
+import { Signal } from './signal.entity';
 
 @Controller('signals')
 export class SignalsController {

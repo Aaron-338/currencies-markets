@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, NotFoundException } from '@nestjs/common';
-import { TransactionsService } from './transactions.service.js';
-import { Transaction } from './transaction.entity.js';
+import { TransactionsService } from './transactions.service';
+import { Transaction } from './transaction.entity';
 
 @Controller('transactions')
 export class TransactionsController {

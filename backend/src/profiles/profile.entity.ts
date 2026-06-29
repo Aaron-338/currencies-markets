@@ -5,6 +5,7 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
+import { User } from '../users/user.entity';
 
 @Entity()
 export class Profile {
@@ -23,7 +24,8 @@ export class Profile {
   @Column({ nullable: true })
   companyName: string;
 
-  @OneToOne('User', 'profile')
+  @OneToOne(() => User, (user) => user.profile, { onDelete: 'CASCADE' })
   @JoinColumn()
-  user: any;
-} 
+  user: User;
+}
+export type ProfileEntity = Profile;

@@ -10,7 +10,7 @@ async function checkSources() {
       const events = response.data.data;
       console.log(`📊 Found ${events.length} events for today\n`);
       
-      // Group events by source
+      // Group events by source 
       const sourceGroups = {};
       events.forEach(event => {
         const source = event.source || 'UNKNOWN';

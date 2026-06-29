@@ -1,6 +1,6 @@
 import { Controller, Get, Query, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { NewsApiService, NewsArticle } from './news-api.service.js';
+import { NewsApiService, NewsArticle } from './news-api.service';
 
 @Controller('market-news')
 export class MarketNewsController {
@@ -56,11 +56,13 @@ export class MarketNewsController {
       };
     } catch (error) {
       console.error('Error fetching public market news:', error);
-      // Return fallback data for public endpoint
+      // Return enhanced fallback data for public endpoint
+      const fallbackNews = await this.newsApiService.fetchFinancialNews(['finance'], true);
+      const limitedNews = fallbackNews.slice(0, parseInt(limit || '3', 10));
       return {
         success: true,
-        data: this.getFallbackNews().slice(0, parseInt(limit || '3', 10)),
-        count: 3
+        data: limitedNews,
+        count: limitedNews.length
       };
     }
   }

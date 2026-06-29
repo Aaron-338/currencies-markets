@@ -1,5 +1,5 @@
 import Hero from "@/components/hero"
-import OurServices from "@/components/our-services-section"
+import ProblemsAndSolutions from "@/components/problems-and-solutions"
 import ToolsSection from "@/components/tools-section"
 import MarketNews from "@/components/market-news"
 import CallToAction from "@/components/call-to-action"
@@ -10,11 +10,9 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-16 pb-16">
       <Hero />
+      <ProblemsAndSolutions />
       <div className="container">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <OurServices />
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
           <div className="space-y-8">
             <MiniMarketWatch />
           </div>

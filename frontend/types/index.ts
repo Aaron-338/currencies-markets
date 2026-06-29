@@ -99,6 +99,7 @@ export enum SubscriptionType {
   PERSONAL_COACHING = 'personal_coaching',
   IVREX_PRO = 'ivrex_pro',
   SHARES_CHALLENGE = 'shares_challenge',
+  ACCOUNT_MANAGEMENT = 'account_management',
 }
 
 export interface Subscription {

@@ -20,7 +20,7 @@ const services: Service[] = [
   {
     name: "Trading Signals",
     type: SubscriptionType.TRADING_SIGNALS,
-    price: "$29/mo",
+    price: "M250/mo",
     description: "Receive real-time buy/sell signals from our expert analysts.",
     icon: Zap,
     features: ["Real-time market signals", "Entry & exit points", "Risk management alerts"],
@@ -29,7 +29,7 @@ const services: Service[] = [
   {
     name: "Copy Trading Access",
     type: SubscriptionType.COPY_TRADING,
-    price: "$49/mo",
+    price: "M1000/mo",
     description: "Automatically copy the trades of our top-performing traders.",
     icon: Users,
     features: ["Auto-copy expert trades", "Risk control settings", "Performance reports"],
@@ -38,7 +38,7 @@ const services: Service[] = [
   {
     name: "Advanced Analytics",
     type: SubscriptionType.ADVANCED_ANALYTICS,
-    price: "$79/mo",
+    price: "M1000/mo",
     description: "Unlock powerful charting tools and in-depth market analysis.",
     icon: BarChart3,
     features: ["Professional charting tools", "Market analysis reports", "Technical indicators"],
@@ -47,10 +47,19 @@ const services: Service[] = [
   {
     name: "Personal Coaching",
     type: SubscriptionType.PERSONAL_COACHING,
-    price: "$199/mo",
+    price: "M5000",
     description: "One-on-one sessions with a professional trading coach.",
     icon: UserCheck,
     features: ["1-on-1 mentorship sessions", "Personalized strategies", "Weekly progress reviews"],
+    accessUrl: "/dashboard?tab=coaching",
+  },
+    {
+    name: "Account Management",
+    type: SubscriptionType.ACCOUNT_MANAGEMENT,
+    price: "M2000",
+    description: "Your account gets to be managed by our experts.",
+    icon: UserCheck,
+    features: ["Minimum Deposit $200", "Over a timeframe of 5 months", "Profits shared anytime 70/30"],  
     accessUrl: "/dashboard?tab=coaching",
   },
 ]

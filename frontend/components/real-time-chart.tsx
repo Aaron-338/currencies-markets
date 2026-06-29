@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { createChart, ColorType, CrosshairMode, LineStyle, IChartApi, ISeriesApi } from 'lightweight-charts';
+import { createChart, ColorType, CrosshairMode, LineStyle, IChartApi, ISeriesApi, CandlestickSeries } from 'lightweight-charts';
 import DerivAPI from '@deriv/deriv-api';
 import { getDerivSymbol } from '@/lib/deriv';
+import { Maximize2, Minimize2, X } from 'lucide-react';
 
 interface RealTimeChartProps {
   symbol: string
@@ -17,6 +18,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ symbol }) => {
 
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   useEffect(() => {
     // Ensure this effect runs only once on mount.
@@ -48,7 +50,7 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ symbol }) => {
         secondsVisible: false,
       },
     })
-    series.current = chart.current.addCandlestickSeries()
+    series.current = chart.current.addSeries(CandlestickSeries, {})
 
     const derivSymbol = getDerivSymbol(symbol)
 
@@ -116,22 +118,79 @@ const RealTimeChart: React.FC<RealTimeChartProps> = ({ symbol }) => {
     }
   }, [symbol]) // Rerun effect if symbol changes
 
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen)
+  }
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isFullscreen) {
+      setIsFullscreen(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isFullscreen) {
+      document.addEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isFullscreen])
+
   if (error) {
     return <div className="text-red-500 text-center p-4">{error}</div>
   }
 
   return (
-    <div className="relative">
-      {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-75 z-10">
-          <div className="text-center">
-            <p className="text-lg font-semibold">Loading Chart...</p>
-            <p className="text-sm text-gray-500">Connecting to market data for {symbol}</p>
+    <>
+      <div className={`${isFullscreen ? 'fixed inset-0 z-50 bg-white dark:bg-gray-900' : 'relative'}`}>
+        {/* Header for fullscreen mode */}
+        {isFullscreen && (
+          <div className="absolute top-4 right-4 z-10 flex gap-2">
+            <button
+              onClick={toggleFullscreen}
+              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="Exit fullscreen"
+            >
+              <Minimize2 className="h-5 w-5" />
+            </button>
           </div>
-        </div>
-      )}
-      <div ref={chartContainerRef} className="w-full h-[500px]" />
-    </div>
+        )}
+
+        {/* Chart container */}
+        <div 
+          ref={chartContainerRef} 
+          className={`${isFullscreen ? 'w-full h-full' : 'w-full h-[500px]'}`}
+        />
+
+        {/* Controls for normal mode */}
+        {!isFullscreen && (
+          <div className="absolute top-2 right-2 z-10">
+            <button
+              onClick={toggleFullscreen}
+              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              title="View in fullscreen"
+            >
+              <Maximize2 className="h-4 w-4" />
+            </button>
+          </div>
+        )}
+
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-900 bg-opacity-75 dark:bg-opacity-75 z-10">
+            <div className="text-center">
+              <p className="text-lg font-semibold">Loading Chart...</p>
+              <p className="text-sm text-gray-500">Connecting to market data for {symbol}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

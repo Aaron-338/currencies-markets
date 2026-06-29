@@ -1,4 +1,5 @@
 import EconomicCalendar from "./economic-calendar"
+import WeeklySchedule from "./weekly-schedule"
 
 export default function ToolsSection() {
   return (
@@ -10,6 +11,7 @@ export default function ToolsSection() {
         </p>
       </div>
       <EconomicCalendar />
+      <WeeklySchedule />
     </section>
   )
 } 

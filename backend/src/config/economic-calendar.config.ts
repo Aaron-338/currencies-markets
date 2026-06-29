@@ -28,11 +28,12 @@ export const economicCalendarConfig = {
     refreshIntervalMinutes: parseInt(process.env.ECONOMIC_REFRESH_INTERVAL_MINUTES || '60'),
   },
 
-  // Rate Limiting (Adjusted for Free Tier)
+  // Rate Limiting (Optimized for Free Tier)
   rateLimiting: {
     enabled: true,
-    fmpCallsPerMinute: 1, // Very conservative for free tier (250/day)
-    fredCallsPerMinute: 100,
+    fmpCallsPerMinute: 2, // Slightly increased but still conservative (250/day = ~10/hour max)
+    fredCallsPerMinute: 100, // FRED is unlimited but be respectful
+    dailyLimitWarningThreshold: 200, // Warning when approaching daily limit
   },
 
   // Fallback Configuration

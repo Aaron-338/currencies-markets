@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { EconomicApiService } from './economic-api.service.js';
-import { EconomicCacheService, CacheStats } from './economic-cache.service.js';
-import { EconomicEvent, EventImportance } from './economic-event.entity.js';
+import { EconomicApiService } from './economic-api.service';
+import { EconomicCacheService, CacheStats } from './economic-cache.service';
+import { EconomicEvent, EventImportance } from './economic-event.entity';
 
 interface GetEventsParams {
   startDate?: Date;

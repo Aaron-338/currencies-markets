@@ -9,8 +9,8 @@ import {
   HttpCode,
   HttpStatus
 } from '@nestjs/common';
-import { EconomicEventsService } from './economic-events.service.js';
-import { EventImportance } from './economic-event.entity.js';
+import { EconomicEventsService } from './economic-events.service';
+import { EventImportance } from './economic-event.entity';
 
 @Controller('economic-events')
 export class EconomicEventsController {

@@ -2,22 +2,31 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter.js';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
-import { UsersModule } from './users/users.module.js';
-import { AssetsModule } from './assets/assets.module.js';
-import { PortfoliosModule } from './portfolios/portfolios.module.js';
-import { PortfolioAssetsModule } from './portfolio-assets/portfolio-assets.module.js';
-import { TransactionsModule } from './transactions/transactions.module.js';
-import { AuthModule } from './auth/auth.module.js';
-import { SubscriptionsModule } from './subscriptions/subscriptions.module.js';
-import { SignalsModule } from './signals/signals.module.js';
-import { EconomicEventsModule } from './economic-events/economic-events.module.js';
-import { ChallengesModule } from './challenges/challenges.module.js';
-import { NotificationsModule } from './notifications/notifications.module.js';
-import { MarketNewsModule } from './market-news/market-news.module.js';
-import AppDataSource from './config/typeorm.js';
+import { PugAdapter } from '@nestjs-modules/mailer/dist/adapters/pug.adapter';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
+import { AssetsModule } from './assets/assets.module';
+import { PortfoliosModule } from './portfolios/portfolios.module';
+import { PortfolioAssetsModule } from './portfolio-assets/portfolio-assets.module';
+import { TransactionsModule } from './transactions/transactions.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { NotificationsModule } from './notifications/notifications.module'; 
+import { SignalsModule } from './signals/signals.module';
+import { AuthModule } from './auth/auth.module';
+import AppDataSource from './config/typeorm';
+
+import { User } from './users/user.entity';
+import { Profile } from './profiles/profile.entity';
+import { Portfolio } from './portfolios/portfolio.entity';
+import { PortfolioAsset } from './portfolio-assets/portfolio-asset.entity';
+import { Transaction } from './transactions/transaction.entity';
+import { Asset } from './assets/asset.entity';
+import { Session } from './auth/session.entity';
+import { Subscription } from './subscriptions/subscription.entity';
+import { Notification } from './notifications/notification.entity';
+import { Signal } from './signals/signal.entity';
+
 
 @Module({
   imports: [
@@ -49,7 +58,21 @@ import AppDataSource from './config/typeorm.js';
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: () => AppDataSource.options,
+      useFactory: async () => ({
+        ...AppDataSource.options,
+        entities: [
+          User,
+          Profile,
+          Portfolio,
+          PortfolioAsset,
+          Transaction,
+          Asset,
+          Session,
+          Subscription,
+          Notification,
+          Signal,
+        ],
+      }),
     }),
     UsersModule,
     AssetsModule,
@@ -58,11 +81,8 @@ import AppDataSource from './config/typeorm.js';
     TransactionsModule,
     AuthModule,
     SubscriptionsModule,
-    SignalsModule,
-    EconomicEventsModule,
-    ChallengesModule,
     NotificationsModule,
-    MarketNewsModule,
+    SignalsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -23,15 +23,17 @@ const ServiceIcons = {
   [SubscriptionType.PERSONAL_COACHING]: UserCheck,
   [SubscriptionType.IVREX_PRO]: Crown,
   [SubscriptionType.SHARES_CHALLENGE]: Lock,
+  [SubscriptionType.ACCOUNT_MANAGEMENT]: UserCheck,
 };
 
 const ServicePricing = {
-  [SubscriptionType.TRADING_SIGNALS]: '$29',
-  [SubscriptionType.COPY_TRADING]: '$49',
-  [SubscriptionType.ADVANCED_ANALYTICS]: '$79',
+  [SubscriptionType.TRADING_SIGNALS]: 'M250',
+  [SubscriptionType.COPY_TRADING]: 'M1000',
+  [SubscriptionType.ADVANCED_ANALYTICS]: 'M',
   [SubscriptionType.PERSONAL_COACHING]: '$199',
   [SubscriptionType.IVREX_PRO]: '$99',
   [SubscriptionType.SHARES_CHALLENGE]: '$99',
+  [SubscriptionType.ACCOUNT_MANAGEMENT]: '$200',
 };
 
 export function SubscriptionGuard({

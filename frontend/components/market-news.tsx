@@ -83,11 +83,8 @@ export default function MarketNews() {
         throw new Error('No news articles received or empty data')
       }
     } catch (err) {
-      console.error('❌ Error fetching news:', err)
-      
       // Retry logic (up to 2 retries)
       if (retryCount < 2) {
-        console.log(`🔁 Retrying news fetch... (${retryCount + 1}/2)`)
         setRetryCount(prev => prev + 1)
         // Wait before retrying
         setTimeout(() => {

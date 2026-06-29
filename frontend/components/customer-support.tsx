@@ -19,13 +19,13 @@ export default function CustomerSupport({ showCardWrapper = true }: { showCardWr
           </a>
         </Button>
         <Button variant="outline" asChild>
-          <a href="tel:+1234567890">
+          <a href="tel:+266 5945 7496">
             <Phone className="mr-2 h-4 w-4" />
             Phone Support
           </a>
         </Button>
         <Button variant="outline" asChild>
-          <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+          <a href="https://wa.me/59457496" target="_blank" rel="noopener noreferrer">
             <MessageSquare className="mr-2 h-4 w-4" />
             WhatsApp
           </a>

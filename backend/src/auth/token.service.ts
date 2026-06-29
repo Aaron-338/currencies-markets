@@ -35,7 +35,7 @@ export class TokenService {
   generateAccessToken(user: User, sessionId: string): string {
     const payload: AccessTokenPayload = {
       userId: user.id,
-      email: user.email,
+      email: user.email ?? '',
       role: user.role,
       sessionId,
     };

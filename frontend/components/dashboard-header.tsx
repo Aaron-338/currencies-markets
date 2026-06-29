@@ -61,7 +61,6 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
         description: "You have been securely logged out. See you next time!",
       })
     } catch (error) {
-      console.error("Logout error:", error)
       toast({
         variant: "destructive",
         title: "Logout Failed",

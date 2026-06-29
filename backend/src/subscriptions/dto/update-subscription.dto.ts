@@ -1,16 +1,16 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { SubscriptionStatus } from '../subscription.entity.js';
+import { IsString, IsOptional } from 'class-validator';
+import { SubscriptionStatus } from '../subscription.entity';
 
 export class UpdateSubscriptionDto {
   @IsOptional()
-  @IsEnum(SubscriptionStatus)
+  @IsString()
   status?: SubscriptionStatus;
 
   @IsOptional()
   @IsString()
-  verificationNotes?: string;
+  paymentMethod?: string;
 
   @IsOptional()
   @IsString()
-  receiptImagePath?: string;
-} 
+  paymentPhoneNumber?: string;
+}

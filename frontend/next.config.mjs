@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   // Re-enable optimizations for better performance
   eslint: {
     ignoreDuringBuilds: false, // Enable ESLint for better code quality
@@ -17,6 +18,7 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     optimizeCss: true, // Enable CSS optimization
+
     optimizePackageImports: [
       '@radix-ui/react-accordion',
       '@radix-ui/react-alert-dialog',
@@ -36,7 +38,7 @@ const nextConfig = {
       'date-fns'
     ],
   },
-  
+  allowedDevOrigins: ["https://ivrex.co.ls"],
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
@@ -53,6 +55,7 @@ const nextConfig = {
           vendors: false,
           // Radix UI bundle
           radix: {
+            
             name: 'radix',
             chunks: 'all',
             test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,

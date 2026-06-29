@@ -10,6 +10,7 @@ const getSubscriptionType = (serviceName: string): SubscriptionType => {
         "Copy Trading Access": SubscriptionType.COPY_TRADING,
         "Advanced Analytics": SubscriptionType.ADVANCED_ANALYTICS,
         "Personal Coaching": SubscriptionType.PERSONAL_COACHING,
+        "Organisational Training": SubscriptionType.ACCOUNT_MANAGEMENT,
         "IVREX Pro": SubscriptionType.IVREX_PRO,
     };
     return mapping[serviceName] || SubscriptionType.IVREX_PRO;
@@ -25,7 +26,7 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const serviceName = formData.get('serviceName') as string;
-    const price = formData.get('price') as string;
+    const price = formData.get('price') as number | string;
 
     // We need to transform the service name to the enum type for the backend
     formData.set('type', getSubscriptionType(serviceName));

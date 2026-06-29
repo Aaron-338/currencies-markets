@@ -35,14 +35,14 @@ export default function ApiIntegration() {
                   {[
                     {
                       name: "Production Key",
-                      key: "sk_live_51NxXXXXXXXXXXXXXXXXXXXXXX",
+                      key: "sk_live_**************************", // Placeholder for security
                       created: "Apr 15, 2025",
                       lastUsed: "2 hours ago",
                       status: "Active",
                     },
                     {
                       name: "Test Key",
-                      key: "sk_test_51NxXXXXXXXXXXXXXXXXXXXXXX",
+                      key: "sk_test_**************************", // Placeholder for security
                       created: "Apr 15, 2025",
                       lastUsed: "1 day ago",
                       status: "Active",

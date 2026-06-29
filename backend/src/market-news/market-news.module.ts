@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { MarketNewsController } from './market-news.controller.js';
-import { NewsApiService } from './news-api.service.js';
-import { AuthModule } from '../auth/auth.module.js';
+import { MarketNewsController } from './market-news.controller';
+import { NewsApiService } from './news-api.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [AuthModule],

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import ServiceCard from "./service-card"
+import ServiceCard from "@/components/service-card"
 
 export default function OurServices() {
     const [selectedService, setSelectedService] = useState(0)
@@ -19,7 +19,7 @@ export default function OurServices() {
           "Take Profit (TP) – target profit level",
           "Time Frame – e.g., M15 (15-minute chart), H1, etc.",
         ],
-        pricing: "M300 Weekly / M1000 Monthly",
+        pricing: "M350 Weekly / M1000 Monthly",
       },
       {
         title: "Mentorship Programs",
@@ -30,7 +30,7 @@ export default function OurServices() {
           "Physical Classes (at our offices) - M3000",
           "One-on-One Coaching (Private) - M5000",
         ],
-        pricing: "From M1000",
+        pricing: "From M3500",
       },
       {
         title: "Forex Signals",
@@ -54,6 +54,17 @@ export default function OurServices() {
           "Withdraw once in 30 days",
         ],
         pricing: "M1000 Monthly",
+      },
+      {
+        title: "Account Management",
+        description: "Our trusted experts handle your account for you for a timeframe of 5 months.",
+        details: [
+          "Fully managed trading master account",
+          "Performance reports",
+          "Risk-controlled strategies",
+          "Profit can be shared anytime 70/30",
+        ],
+        pricing: "M2000 Monthly",
       },
       {
         title: "Pool Accounts",
@@ -106,4 +117,4 @@ export default function OurServices() {
         </div>
       </section>
   )
-} 
+}

@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between, LessThan } from 'typeorm';
-import { EconomicEvent, EventImportance } from './economic-event.entity.js';
-import { economicCalendarConfig } from '../config/economic-calendar.config.js';
+import { EconomicEvent, EventImportance } from './economic-event.entity';
+import { economicCalendarConfig } from '../config/economic-calendar.config';
 
 export interface CacheStats {
   totalEvents: number;
@@ -139,7 +139,7 @@ export class EconomicCacheService {
         });
 
         const staleThreshold = new Date(Date.now() - economicCalendarConfig.cache.ttlHours * 60 * 60 * 1000);
-        const freshEventsCount = await this.economicEventRepository.count({
+        const staleEventsCount = await this.economicEventRepository.count({
           where: {
             releaseDate: Between(dayStart, dayEnd),
             lastUpdated: LessThan(staleThreshold)
@@ -148,7 +148,7 @@ export class EconomicCacheService {
 
         if (eventsCount === 0) {
           missingDates.push(new Date(current));
-        } else if (freshEventsCount > 0) {
+        } else if (staleEventsCount > 0) {
           staleDates.push(new Date(current));
         }
 

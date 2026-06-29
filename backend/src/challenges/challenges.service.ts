@@ -94,7 +94,7 @@ export class ChallengesService {
   async linkSubscription(challengeId: string, subscriptionId: string): Promise<Challenge> {
     const challenge = await this.findOne(challengeId);
     const subscription = await this.subscriptionsRepository.findOne({
-      where: { id: subscriptionId },
+      where: { id: Number(subscriptionId) },
     });
 
     if (!subscription) {
@@ -172,14 +172,6 @@ export class ChallengesService {
     if (!approvedChallenge) {
       return false;
     }
-
-    // Check if the associated subscription is still active
-    if (approvedChallenge.subscription && 
-        approvedChallenge.subscription.status === SubscriptionStatus.ACTIVE &&
-        approvedChallenge.subscription.expiresAt > new Date()) {
-      return true;
-    }
-
     return false;
   }
 

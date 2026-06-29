@@ -3,22 +3,24 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { API_BASE_URL } from '@/lib/api';
 
-export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+interface Params {
+  params: { id: string };
+}
+
+export async function PATCH(request: Request, { params }: Params) {
   const session = await getServerSession(authOptions);
-  
-  // @ts-ignore
-  const isSuperAdmin = session?.user?.role === 'admin' && (!session?.user?.verificationResponsibilities || session?.user?.verificationResponsibilities.length === 0);
+
+  // Only allow super admins (admins without verification responsibilities)
+  const isSuperAdmin =
+    session?.user?.role === 'admin' &&
+    (!session?.user?.verificationResponsibilities || session.user.verificationResponsibilities.length === 0);
 
   if (!session?.accessToken || !isSuperAdmin) {
     return NextResponse.json({ message: 'Forbidden' }, { status: 403 });
   }
 
   try {
-    const resolvedParams = await params;
-    const userId = resolvedParams.id;
+    const userId = params.id;
     const body = await request.json();
 
     const res = await fetch(`${API_BASE_URL}/users/${userId}/permissions`, {
@@ -31,15 +33,21 @@ export async function PATCH(
     });
 
     if (!res.ok) {
-      const errorData = await res.json();
-      return NextResponse.json({ message: errorData.message || 'Failed to update user permissions' }, { status: res.status });
+      let errorMessage = 'Failed to update user permissions';
+      try {
+        const errorData = await res.json();
+        errorMessage = errorData.message || errorMessage;
+      } catch {
+        const text = await res.text();
+        errorMessage = text || errorMessage;
+      }
+      return NextResponse.json({ message: errorMessage }, { status: res.status });
     }
 
     const updatedUser = await res.json();
     return NextResponse.json(updatedUser);
-
   } catch (error) {
     console.error('Error updating user permissions:', error);
     return NextResponse.json({ message: 'An internal server error occurred' }, { status: 500 });
   }
-} 
+}

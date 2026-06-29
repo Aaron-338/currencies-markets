@@ -6,9 +6,9 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import TradingViewChart from "@/components/trading-view-chart"
-import { LineChart, ChevronsUpDown } from "lucide-react"
+import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { ChevronsUpDown, LineChart } from "lucide-react"
+import EnhancedMarketWatch from "@/components/enhanced-market-watch"
 
 export default function AnalyticalSolutions() {
   const [isOpen, setIsOpen] = useState(true)
@@ -24,7 +24,7 @@ export default function AnalyticalSolutions() {
               </div>
               <div>
                 <CardTitle>Analytical Solutions</CardTitle>
-                <CardDescription>Market Watch with Real-Time Chart</CardDescription>
+                <CardDescription>Live Market Data with Deriv API Integration</CardDescription>
               </div>
             </div>
             <CollapsibleTrigger asChild>
@@ -36,11 +36,11 @@ export default function AnalyticalSolutions() {
           </div>
         </CardHeader>
         <CollapsibleContent className="flex-1">
-          <CardContent className="h-full">
-            <TradingViewChart symbol="EUR/USD" />
-          </CardContent>
+          <div className="h-full px-6 pb-6">
+            <EnhancedMarketWatch />
+          </div>
         </CollapsibleContent>
       </Card>
     </Collapsible>
   )
-} 
+}

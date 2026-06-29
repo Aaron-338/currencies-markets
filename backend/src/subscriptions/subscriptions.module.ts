@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { SubscriptionsService } from './subscriptions.service.js';
-import { SubscriptionsController } from './subscriptions.controller.js';
-import { Subscription } from './subscription.entity.js';
-import { User } from '../users/user.entity.js';
-import { MulterModule } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
+import { SubscriptionsService } from './subscriptions.service';
+import { SubscriptionsController } from './subscriptions.controller';
+import { Subscription } from './subscription.entity';
+import { User } from '../users/user.entity';
 import { existsSync, mkdirSync } from 'fs';
-import { NotificationsModule } from '../notifications/notifications.module.js';
+import { NotificationsModule } from '../notifications/notifications.module';
 
 // Ensure receipts directory exists
 const uploadsDir = './uploads';
@@ -24,11 +22,7 @@ if (!existsSync(receiptsDir)) {
 @Module({
   imports: [
     TypeOrmModule.forFeature([Subscription, User]),
-    MulterModule.register({
-      storage: diskStorage({
-        destination: './uploads/receipts',
-      }),
-    }),
+
     NotificationsModule,
   ],
   controllers: [SubscriptionsController],

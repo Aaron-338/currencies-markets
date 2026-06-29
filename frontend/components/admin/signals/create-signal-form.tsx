@@ -30,9 +30,9 @@ interface CreateSignalFormProps {
 
 const formSchema = z.object({
   symbol: z.string().min(1, 'Symbol is required'),
-  entry_price: z.coerce.number().positive('Entry price must be positive'),
-  stop_loss: z.coerce.number().positive('Stop loss must be positive'),
-  take_profit: z.coerce.number().positive('Take profit must be positive'),
+  entry_price: z.number().positive('Entry price must be positive'),
+  stop_loss: z.number().positive('Stop loss must be positive'),
+  take_profit: z.number().positive('Take profit must be positive'),
   type: z.nativeEnum(SignalType),
 });
 
@@ -45,9 +45,9 @@ export default function CreateSignalForm({ onSignalCreated }: CreateSignalFormPr
     resolver: zodResolver(formSchema),
     defaultValues: {
       symbol: '',
-      entry_price: 0,
-      stop_loss: 0,
-      take_profit: 0,
+      entry_price: 0.01,
+      stop_loss: 0.01,
+      take_profit: 0.01,
       type: SignalType.BUY,
     },
   });
@@ -117,7 +117,12 @@ export default function CreateSignalForm({ onSignalCreated }: CreateSignalFormPr
             <FormItem>
               <FormLabel>Entry Price</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+                  value={field.value ?? ''}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -130,7 +135,12 @@ export default function CreateSignalForm({ onSignalCreated }: CreateSignalFormPr
             <FormItem>
               <FormLabel>Stop Loss</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+                  value={field.value ?? ''}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -143,7 +153,12 @@ export default function CreateSignalForm({ onSignalCreated }: CreateSignalFormPr
             <FormItem>
               <FormLabel>Take Profit</FormLabel>
               <FormControl>
-                <Input type="number" {...field} />
+                <Input
+                  type="number"
+                  {...field}
+                  onChange={(e) => field.onChange(e.target.value === '' ? undefined : parseFloat(e.target.value))}
+                  value={field.value ?? ''}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -9,10 +9,7 @@ import { User } from '../users/user.entity.js';
 import { Profile } from '../profiles/profile.entity.js';
 import { SessionService } from './session.service.js';
 import { TokenService } from './token.service.js';
-import { createRequire } from 'module';
-
-const require = createRequire(import.meta.url);
-const bcrypt = require('bcryptjs');
+import * as bcrypt from 'bcryptjs';
 
 // Temporary line to force TypeScript re-evaluation
 

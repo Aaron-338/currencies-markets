@@ -1,25 +1,63 @@
-import { DataSource, DataSourceOptions } from 'typeorm';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import * as dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
+import { User } from '../users/user.entity';
+import { Profile } from '../profiles/profile.entity';
+import { Asset } from '../assets/asset.entity';
+import { Portfolio } from '../portfolios/portfolio.entity';
+import { PortfolioAsset } from '../portfolio-assets/portfolio-asset.entity';
+import { Transaction } from '../transactions/transaction.entity';
+import { Session } from '../auth/session.entity';
+import { Subscription } from '../subscriptions/subscription.entity';
 
-// Load environment variables
-dotenv.config();
+const isMigration = process.env.TYPEORM_MIGRATION === 'true';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const config: DataSourceOptions = {
+const dataSource = new DataSource({
   type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432'),
-  username: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'ivrex',
-  entities: [join(__dirname, '/../**/*.entity{.js,.ts}')],
-  migrations: [join(__dirname, '/../migrations/*{.js,.ts}')],
-  synchronize: true, // Keep this as false for production to use migrations
-};
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: '12345678',
+  database: 'ivrex',
+  synchronize: true,
+  logging: true,
+  entities: [
+    User,
+    Profile,
+    Portfolio,
+    Transaction,
+    Session,
+    Subscription,
+    Asset,
+    PortfolioAsset,
+  ],
+  migrations: isMigration ? ['src/migrations/*.ts'] : [],
+});
 
-const dataSource = new DataSource(config);
 export default dataSource;
+
+// Initialize separately to avoid TypeORM metadata issues
+export const AppDataSource = dataSource.initialize()
+  .then(() => console.log('Data Source initialized!'))
+  .catch((err) => console.error('Error initializing Data Source:', err));
+
+// Export entities and types
+export {
+  User,
+  Profile,
+  Portfolio,
+  Transaction,
+  Session,
+  Subscription,
+  Asset,
+  PortfolioAsset,
+};
+export type {
+  User as UserEntity,
+  Profile as ProfileEntity,
+  Portfolio as PortfolioEntity,
+  Transaction as TransactionEntity,
+  Session as SessionEntity,
+  Subscription as SubscriptionEntity,
+  Asset as AssetEntity,
+  PortfolioAsset as PortfolioAssetEntity,
+};
+export { isMigration };

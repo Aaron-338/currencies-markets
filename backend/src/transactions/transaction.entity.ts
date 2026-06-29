@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { User } from '../users/user.entity.js';
-import { Asset } from '../assets/asset.entity.js';
-import { Portfolio } from '../portfolios/portfolio.entity.js';
+import { User } from '../users/user.entity';
+import { Asset } from '../assets/asset.entity';
+import { Portfolio } from '../portfolios/portfolio.entity';
 
 export enum TransactionType {
   BUY = 'BUY',

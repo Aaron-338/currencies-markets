@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException, Inject, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Signal, SignalStatus } from './signal.entity.js';
-import { CreateSignalDto } from './dto/create-signal.dto.js';
-import { NotificationsService } from '../notifications/notifications.service.js';
-import { NotificationsWebSocketGateway } from '../notifications/notifications-websocket.gateway.js';
-import { User } from '../users/user.entity.js';
+import { Signal, SignalStatus } from './signal.entity';
+import { CreateSignalDto } from './dto/create-signal.dto';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationsWebSocketGateway } from '../notifications/notifications-websocket.gateway';
+import { User } from '../users/user.entity';
 
 @Injectable()
 export class SignalsService {

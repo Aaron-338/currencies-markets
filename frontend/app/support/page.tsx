@@ -33,13 +33,13 @@ export default function SupportPage() {
                     <label htmlFor="name" className="text-sm font-medium">
                       Full Name
                     </label>
-                    <Input id="name" placeholder="John Doe" />
+                    <Input id="name" placeholder="Khauhelo Makara" />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">
                       Email Address
                     </label>
-                    <Input id="email" type="email" placeholder="john@example.com" />
+                    <Input id="email" type="email" placeholder="khauhelo@example.com" />
                   </div>
                 </div>
 

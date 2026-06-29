@@ -87,9 +87,9 @@ export default function BulkPaymentProcessing() {
                       </div>
 
                       {[
-                        { name: "John Smith", account: "john.smith@example.com", amount: "$1,250.00" },
-                        { name: "Sarah Johnson", account: "sarah.j@example.com", amount: "$2,340.00" },
-                        { name: "Michael Brown", account: "mbrown@example.com", amount: "$1,875.50" },
+                        { name: "Sekoai Lekoala", account: "sekoai7@gmail.com", amount: "$1,250.00" },
+                        { name: "Khothu Moshemane", account: "khothu.m@gmail.com", amount: "$2,340.00" },
+                        { name: "Ali Brown", account: "abrown@example.com", amount: "$1,875.50" },
                       ].map((recipient, index) => (
                         <div key={index} className="grid grid-cols-12 gap-2 p-3 border-b items-center">
                           <div className="col-span-5">

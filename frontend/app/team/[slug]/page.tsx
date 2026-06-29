@@ -161,22 +161,21 @@ const teamMembers: TeamMemberData[] = [
   {
     slug: "mosotho-mohau",
     name: "Mosotho Mohau",
-    role: "Assistant Head of IT and Solutions",
-    bio: "Web development specialist who assisted in building the Ivrex platform with strong technical expertise.",
-    fullBio: "Mosotho Mohau serves as Assistant Head of IT and Solutions at Ivrex, bringing valuable expertise in web development and platform architecture. With a degree in Computer Science from the National University of Lesotho, Mosotho has been instrumental in building and maintaining the Ivrex platform. His technical skills and collaborative approach have contributed significantly to the development of our trading infrastructure and user experience enhancements.",
+    role: "Chief Technology Architect",
+    bio: "Chief Technology Architect who played a major role in building the Ivrex platform, working with our team to create innovative trading solutions.",
+    fullBio: "Mosotho Mohau serves as Chief Technology Architect at Ivrex, bringing valuable expertise in web development and platform design. Mosotho has been instrumental in building and maintaining the Ivrex platform. His technical contributions and collaborative approach have significantly contributed to the development of our trading infrastructure and user experience. LinkedIn: linkedin.com/in/mohau-mosotho-951a2a24b",
     image: "/hause.jpg",
     email: "mosotho.ivrex@gmail.com",
     experience: [
-      "Web development specialist",
-      "Assisted in building Ivrex platform",
+      "Chief Technology Architect and platform design",
+      "Major contributor to Ivrex platform development",
       "Platform architecture and maintenance",
       "User experience optimization",
       "Technical infrastructure development",
-      "Collaborative development approach"
+      "Collaborative team development"
     ],
     achievements: [
       "Key contributor to Ivrex platform development",
-      "Degree in Computer Science",
       "Successful web development projects",
       "Platform optimization and enhancement",
       "Technical problem-solving expertise",
@@ -185,17 +184,16 @@ const teamMembers: TeamMemberData[] = [
     specialties: [
       "Web Development",
       "Platform Architecture",
-      "Frontend Development",
+      "Frontend & Backend Development",
       "User Experience",
-      "Technical Infrastructure",
-      "System Maintenance",
-      "Collaborative Development"
+      "Technical Problem-solving",
+      "Team Collaboration"
     ],
     education: [
       "BSc in Computer Science - National University of Lesotho"
     ],
     socialLinks: {
-      facebook: "https://www.facebook.com/daniel.matsemela.9",
+      linkedin: "https://www.linkedin.com/in/mohau-mosotho-951a2a24b",
       whatsapp: "https://wa.me/+26662230241"
     }
   }

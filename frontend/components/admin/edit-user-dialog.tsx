@@ -16,7 +16,7 @@ interface EditUserDialogProps {
   onUserUpdate: (updatedUser: User) => void;
 }
 
-const ALL_RESPONSIBILITIES = ['mpesa', 'ecocash'];
+const ALL_RESPONSIBILITIES = ['mpesa', 'ecocash', 'skrill', 'paypal'];
 
 export function EditUserDialog({ user, isOpen, onClose, onUserUpdate }: EditUserDialogProps) {
   const [role, setRole] = useState(user?.role || 'user');
@@ -73,7 +73,6 @@ export function EditUserDialog({ user, isOpen, onClose, onUserUpdate }: EditUser
       onClose();
 
     } catch (error: any) {
-      console.error(error);
       toast({
         variant: "destructive",
         title: "Error",

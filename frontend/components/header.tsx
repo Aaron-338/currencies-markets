@@ -15,7 +15,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Menu, X, User, Settings, LogOut, BarChart3 } from "lucide-react"
-import { ModeToggle } from "@/components/mode-toggle"
 import { useToast } from "@/components/ui/use-toast"
 import { logoutServerSide } from "@/lib/api"
 
@@ -35,7 +34,7 @@ export default function Header() {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Our Services", href: "/#our-services" },
+    { label: "Our Services", href: "/services" },
     { label: "Tools", href: "/#tools" },
     { label: "Support", href: "/support" },
     { label: "Real-Time Market", href: "/market-watch/real-time" },
@@ -239,8 +238,6 @@ export default function Header() {
 
         {/* Auth Section - Fixed width */}
         <div className="flex items-center gap-2 w-auto">
-          <ModeToggle />
-
           <div className="hidden md:flex">
             <AuthSection />
           </div>

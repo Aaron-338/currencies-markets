@@ -2,14 +2,14 @@ import { Controller, Get, Post, Body, Param, Delete, NotFoundException, UseGuard
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { UsersService } from './users.service.js';
-import { User } from './user.entity.js';
+import { UsersService } from './users.service';
+import { User } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
-import { UpdateProfileDto } from './dto/update-profile.dto.js';
+import { UpdateProfileDto } from './dto/update-profile.dto';
 import { Express } from 'express';
-import { UpdatePermissionsDto } from './dto/update-permissions.dto.js';
-import { AdminGuard } from '../auth/admin.guard.js';
+import { UpdatePermissionsDto } from './dto/update-permissions.dto';
+import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('users')
 export class UsersController {

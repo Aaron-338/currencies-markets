@@ -5,9 +5,11 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm';
-import { Portfolio } from '../portfolios/portfolio.entity.js';
-import { Transaction } from '../transactions/transaction.entity.js';
-import { Subscription } from '../subscriptions/subscription.entity.js';
+import { Portfolio } from '../portfolios/portfolio.entity';
+import { Transaction } from '../transactions/transaction.entity';
+import { Subscription } from '../subscriptions/subscription.entity';
+import { Session } from '../auth/session.entity';
+import { Profile } from '../profiles/profile.entity';
 
 export enum UserRole {
   USER = 'user',
@@ -19,10 +21,10 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true, nullable: true })
+  @Column({ type: 'varchar', unique: true, nullable: true })
   email: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   password: string;
 
   @Column({
@@ -47,21 +49,22 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   updatedAt: Date;
 
-  @OneToOne('Profile', 'user', {
+  @OneToOne(() => Profile, (profile) => profile.user, {
     cascade: true,
     eager: true,
   })
-  profile: any;
+  profile: Profile;
 
-  @OneToMany('Portfolio', (portfolio: Portfolio) => portfolio.user)
+  @OneToMany(() => Portfolio, (portfolio) => portfolio.user)
   portfolios: Portfolio[];
 
-  @OneToMany('Transaction', (transaction: Transaction) => transaction.user)
+  @OneToMany(() => Transaction, (transaction) => transaction.user)
   transactions: Transaction[];
-  
-  @OneToMany(() => Subscription, (subscription: Subscription) => subscription.user)
+
+  @OneToMany(() => Subscription, subscription => subscription.user)
   subscriptions: Subscription[];
 
-  @OneToMany('Session', (session: any) => session.user)
-  sessions: any[];
+  @OneToMany(() => Session, (session) => session.user)
+  sessions: Session[];
 }
+export type UserEntity = User;

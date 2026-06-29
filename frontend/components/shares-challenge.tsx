@@ -166,11 +166,8 @@ export default function SharesChallenge({ showCardWrapper = true }: { showCardWr
       setHasAccess(accessCheck.hasAccess)
       
     } catch (error: any) {
-      console.error('Failed to check challenge and subscription status:', error)
-      
       // Handle authentication errors
       if (error.response?.status === 401) {
-        console.warn('User not authenticated - skipping challenge status check')
         // Don't show error to user for auth issues, just silently fail
         return
       }
@@ -248,13 +245,6 @@ export default function SharesChallenge({ showCardWrapper = true }: { showCardWr
       setStep("subscribe");
       
     } catch (error: any) {
-      console.error('Challenge submission failed:', error)
-      
-      // Log detailed error information
-      if (error.response) {
-        console.error('Error response:', error.response.data)
-        console.error('Error status:', error.response.status)
-      }
       
       // Handle specific error for existing active challenge
       if (error.response?.status === 400 && error.response?.data?.message?.includes('active challenge submission')) {
@@ -324,7 +314,6 @@ export default function SharesChallenge({ showCardWrapper = true }: { showCardWr
           description: "Your previous challenge has been removed. You can now submit a new one.",
         })
       } catch (error: any) {
-        console.error('Failed to delete previous challenge:', error)
         toast({
           variant: "destructive",
           title: "Error",

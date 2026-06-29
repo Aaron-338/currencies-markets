@@ -1,14 +1,17 @@
-import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
-import { SubscriptionType } from '../subscription.entity.js';
+// src/subscriptions/dto/create-subscription.dto.ts
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { SubscriptionType } from '../subscription.entity';
 
 export class CreateSubscriptionDto {
   @IsNotEmpty()
+  @IsString()
+  serviceName: string;
+
   @IsEnum(SubscriptionType)
   type: SubscriptionType;
 
-  @IsNotEmpty()
-  @IsString()
-  price: string;
+  @IsNumber()
+  price: number;
 
   @IsNotEmpty()
   @IsString()
@@ -20,5 +23,9 @@ export class CreateSubscriptionDto {
 
   @IsOptional()
   @IsString()
-  notes?: string;
-} 
+  fullName?: string;
+
+  @IsOptional()
+  @IsString()
+  email?: string;
+}

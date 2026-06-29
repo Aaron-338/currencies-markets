@@ -1,11 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+// src/subscriptions/subscription.entity.ts
+
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { User } from '../users/user.entity';
 
 export enum SubscriptionStatus {
-  PENDING = 'pending',
   ACTIVE = 'active',
-  EXPIRED = 'expired',
   CANCELLED = 'cancelled',
-  PAYMENT_FAILED = 'payment_failed',
+  PAYMENT_FAILED = 'payment_failed', 
+  PENDING = "pending"// add this if used
 }
 
 export enum SubscriptionType {
@@ -17,57 +19,42 @@ export enum SubscriptionType {
   SHARES_CHALLENGE = 'shares_challenge',
 }
 
-@Entity('subscriptions')
+@Entity()
 export class Subscription {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @ManyToOne('User', 'subscriptions')
-  user: any;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
-  userId: number;
+  serviceName: string;
 
-  @Column({
-    type: 'enum',
-    enum: SubscriptionType,
-  })
+  @Column({ type: 'enum', enum: SubscriptionType })
   type: SubscriptionType;
 
-  @Column('decimal', { precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   price: number;
 
-  @Column({
-    type: 'enum',
-    enum: SubscriptionStatus,
-    default: SubscriptionStatus.PENDING,
-  })
-  status: SubscriptionStatus;
-
-  @Column({ nullable: true })
+  @Column()
   paymentMethod: string;
 
-  @Column({ nullable: true })
+  @Column()
   paymentPhoneNumber: string;
 
   @Column({ nullable: true })
-  receiptImagePath: string;
+  fullName: string;
 
   @Column({ nullable: true })
-  verificationNotes: string;
+  email: string;
 
-  @Column({ nullable: true })
-  verifiedBy: string;
+  @Column({ type: 'enum', enum: SubscriptionStatus, default: SubscriptionStatus.PENDING })
+  status: SubscriptionStatus;
 
-  @Column({ nullable: true })
-  verifiedAt: Date;
-
-  @Column()
-  expiresAt: Date;
+  @ManyToOne(() => User, (user) => user.subscriptions, { eager: false })
+  user: User;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
-} 
+}
+

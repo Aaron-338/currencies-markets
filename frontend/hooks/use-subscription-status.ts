@@ -9,6 +9,7 @@ export enum SubscriptionType {
   PERSONAL_COACHING = 'personal_coaching',
   IVREX_PRO = 'ivrex_pro',
   SHARES_CHALLENGE = 'shares_challenge',
+  ACCOUNT_MANAGEMENT = 'account_management',
 }
 
 export enum SubscriptionStatus {
@@ -55,6 +56,7 @@ export interface SubscriptionHookReturn extends SubscriptionStatusState {
   canAccessAdvancedAnalytics: boolean;
   canAccessPersonalCoaching: boolean;
   canAccessSharesChallenge: boolean;
+  canAccessAccountManagement:boolean;
 }
 
 export function useSubscriptionStatus(): SubscriptionHookReturn {
@@ -143,6 +145,7 @@ export function useSubscriptionStatus(): SubscriptionHookReturn {
   const canAccessAdvancedAnalytics = hasAccessToService(SubscriptionType.ADVANCED_ANALYTICS);
   const canAccessPersonalCoaching = hasAccessToService(SubscriptionType.PERSONAL_COACHING);
   const canAccessSharesChallenge = hasAccessToService(SubscriptionType.SHARES_CHALLENGE);
+  const canAccessAccountManagement = hasAccessToService(SubscriptionType.ACCOUNT_MANAGEMENT);
 
   return {
     // State
@@ -165,5 +168,6 @@ export function useSubscriptionStatus(): SubscriptionHookReturn {
     canAccessAdvancedAnalytics,
     canAccessPersonalCoaching,
     canAccessSharesChallenge,
+    canAccessAccountManagement,
   };
 } 
